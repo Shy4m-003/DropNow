@@ -2,6 +2,8 @@ package com.scrop.dropnow.repository;
 import com.scrop.dropnow.entity.UserEntity;
 import org.springframework.data.repository.CrudRepository;
 
-public interface User_Repository extends CrudRepository<UserEntity,Long> {
+import java.util.Optional;
 
+public interface User_Repository extends CrudRepository<UserEntity,Long> {
+    Optional<UserEntity> findByUserNameAndPassword(String userName,String password);
 }
