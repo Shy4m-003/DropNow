@@ -12,9 +12,9 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String userName;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String emailId;
     @Column(nullable = false)
     private String password;

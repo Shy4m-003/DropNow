@@ -2,6 +2,7 @@ package com.scrop.dropnow.controller;
 
 import com.scrop.dropnow.model.UserDTO;
 import com.scrop.dropnow.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,12 +19,12 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDTO> register(@RequestBody UserDTO userDTO){
+    public ResponseEntity<UserDTO> register(@Valid @RequestBody UserDTO userDTO){
         userDTO = userService.register(userDTO);
         return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
     }
     @PostMapping("/login")
-    public ResponseEntity<UserDTO> login(@RequestBody UserDTO userDto){
+    public ResponseEntity<UserDTO> login(@Valid @RequestBody UserDTO userDto){
         userDto = userService.login(userDto.getUserName(),userDto.getPassword());
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
