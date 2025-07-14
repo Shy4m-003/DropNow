@@ -30,7 +30,7 @@
 
     <!-- Local profile -->
     <springProfile name="Local">
-        <root level="DEBUG">
+        <root level="INFO">
             <appender-ref ref="STDOUT" />
         </root>
     </springProfile>

@@ -1,4 +1,4 @@
-package com.scrop.dropnow.service;
+package com.scrop.dropnow.service.Implemantation;
 
 import com.scrop.dropnow.converter.UserConverter;
 import com.scrop.dropnow.entity.UserEntity;
@@ -6,7 +6,7 @@ import com.scrop.dropnow.exceptions.BusinessException;
 import com.scrop.dropnow.exceptions.ErrorModel;
 import com.scrop.dropnow.model.UserDTO;
 import com.scrop.dropnow.repository.User_Repository;
-import org.apache.catalina.User;
+import com.scrop.dropnow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserLogic implements UserService{
+public class UserLogic implements UserService {
     @Autowired
     private User_Repository userRepository;
     @Autowired
