@@ -1,24 +1,29 @@
 package com.scrop.dropnow.converter;
 
-import com.scrop.dropnow.entity.DropNow_Entity;
-import com.scrop.dropnow.model.Sign_in;
+import com.scrop.dropnow.entity.ReservationEntity;
+import com.scrop.dropnow.model.ReservationRequestDto;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Converter {
-    public DropNow_Entity convertDtoToEntity(Sign_in signin){
-        DropNow_Entity entity = new DropNow_Entity();
-        entity.setName(signin.getName());
-        entity.setEmailId(signin.getEmailId());
-        entity.setPassword(signin.getPassword());
-        return entity ;
+    public ReservationEntity convertDtoToEntity(ReservationRequestDto requestDto){
+        ReservationEntity entity = new ReservationEntity();
+        entity.setVehicle(requestDto.getVehicle());
+        entity.setType(requestDto.getType());
+        entity.setPickup(requestDto.getPickup());
+        entity.setDestination(requestDto.getDestination());
+        entity.setPrice(requestDto.getPrice());
+        return entity;
     }
-    public Sign_in convertEntityToDto(DropNow_Entity entity){
-        Sign_in signin = new Sign_in();
-        signin.setId(entity.getId());
-        signin.setName(entity.getName());
-        signin.setEmailId(entity.getEmailId());
-        signin.setPassword(entity.getPassword());
-        return signin;
+    public ReservationRequestDto convertEntityToDto(ReservationEntity entity){
+        ReservationRequestDto requestDto = new ReservationRequestDto();
+        requestDto.setId(entity.getId());
+        requestDto.setVehicle(entity.getVehicle());
+        requestDto.setType(entity.getType());
+        requestDto.setPickup(entity.getPickup());
+        requestDto.setDestination(entity.getDestination());
+        requestDto.setPrice(entity.getPrice());
+        requestDto.setUserId(entity.getUserEntity().getId());
+        return requestDto;
     }
 }
