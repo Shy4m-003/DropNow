@@ -51,6 +51,7 @@ public class ReservationLogic implements ReservationService {
 			ReservationRequestDto reservationRequestDto = converter.convertEntityToDto(entity);
 			allList.add(reservationRequestDto);
 		}
+
 		return allList;
 	}
 
