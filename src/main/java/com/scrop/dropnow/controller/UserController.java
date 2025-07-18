@@ -9,13 +9,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/DropNow/user")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
     private final UserService userService;
     public UserController(UserService userService) {
@@ -35,5 +33,10 @@ public class UserController {
     public ResponseEntity<UserDTO> login(@Valid @RequestBody UserDTO userDto){
         userDto = userService.login(userDto.getUserName(),userDto.getPassword());
         return new ResponseEntity<>(userDto, HttpStatus.OK);
+    }
+    @GetMapping("/profile/{userName}")
+    public ResponseEntity<UserDTO> getInfoByUserName(@PathVariable String userName){
+        UserDTO userDTO = userService.getInfoByUserName(userName);
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 }

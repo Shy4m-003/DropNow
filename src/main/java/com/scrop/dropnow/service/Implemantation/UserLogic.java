@@ -66,4 +66,19 @@ public class UserLogic implements UserService {
         }
         return userDto;
     }
+
+    @Override
+    public UserDTO getInfoByUserName(String userName) {
+        Optional<UserEntity> entity = userRepository.findByUserName(userName);
+        if (entity.isPresent()) {
+            return userConverter.entityToDto(entity.get());
+        } else {
+            List<ErrorModel> errorModelList = new ArrayList<>();
+            ErrorModel errorModel = new ErrorModel();
+            errorModel.setCode("Invalid Login");
+            errorModel.setMessage("Invalid EmailId or Password");
+            errorModelList.add(errorModel);
+            throw new BusinessException(errorModelList);
+        }
+    }
 }
