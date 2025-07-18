@@ -1,11 +1,12 @@
 package com.scrop.dropnow.repository;
 
-import com.scrop.dropnow.entity.UserEntity;
 import com.scrop.dropnow.entity.VehicleEntity;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
+import java.util.List;
 
-public interface VehicleRepository extends CrudRepository<VehicleEntity, Long> {
-    Optional<VehicleEntity> findAllDriverEntityById(long driverId);
+
+public interface VehicleRepository extends JpaRepository<VehicleEntity, Long> {
+    List<VehicleEntity> findByVehicleType(String vehicleType);
+
 }

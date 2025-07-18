@@ -2,6 +2,7 @@ package com.scrop.dropnow.service.Implemantation;
 
 import com.scrop.dropnow.converter.DriverConvertor;
 import com.scrop.dropnow.entity.DriverEntity;
+import com.scrop.dropnow.entity.UserEntity;
 import com.scrop.dropnow.exceptions.BusinessException;
 import com.scrop.dropnow.exceptions.ErrorModel;
 import com.scrop.dropnow.model.DriverDTO;
@@ -28,6 +29,7 @@ public class DriverLogic implements DriverService {
             ErrorModel errorModel = new ErrorModel();
             errorModel.setCode("Email_Already_Exist");
             errorModel.setMessage("The Email You Entered already Exist");
+            errorModelList.add(errorModel);
             throw new BusinessException(errorModelList);
         }
         if(driverEntityOptional.isPresent()){
@@ -35,6 +37,7 @@ public class DriverLogic implements DriverService {
             ErrorModel errorModel = new ErrorModel();
             errorModel.setCode("User_Name_Exist");
             errorModel.setMessage("The username your entered is already in use");
+            errorModelList.add(errorModel);
             throw new BusinessException(errorModelList);
         }
         DriverEntity entity = driverConvertor.dtoToEntity(driverDTO);
@@ -43,9 +46,9 @@ public class DriverLogic implements DriverService {
         return driverDTO;
     }
     @Override
-    public DriverDTO login(String userName, String password) {
+    public DriverDTO login(String emailId, String password) {
         DriverDTO dto = null;
-        Optional<DriverEntity> optionalDriverEntity = driverRepository.findByUserNameAndPassword(userName,password);
+        Optional<DriverEntity> optionalDriverEntity = driverRepository.findByEmailIdAndPassword(emailId,password);
         if(optionalDriverEntity.isPresent()){
             dto  = driverConvertor.entityToDto(optionalDriverEntity.get());
         }else{
@@ -53,8 +56,24 @@ public class DriverLogic implements DriverService {
             ErrorModel errorModel = new ErrorModel();
             errorModel.setCode("Invalid_Login");
             errorModel.setMessage("Invalid User Name or Password");
+            errorModelList.add(errorModel);
             throw new BusinessException(errorModelList);
         }
         return dto;
+    }
+
+    @Override
+    public DriverDTO getInfoByUserName(String userName) {
+        Optional<DriverEntity> entity = driverRepository.findByUserName(userName);
+        if (entity.isPresent()) {
+            return driverConvertor.entityToDto(entity.get());
+        } else {
+            List<ErrorModel> errorModelList = new ArrayList<>();
+            ErrorModel errorModel = new ErrorModel();
+            errorModel.setCode("Invalid Login");
+            errorModel.setMessage("Invalid EmailId or Password");
+            errorModelList.add(errorModel);
+            throw new BusinessException(errorModelList);
+        }
     }
 }

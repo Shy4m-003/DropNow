@@ -9,11 +9,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("api/DropNow/user")
 public class UserController {
@@ -31,9 +29,16 @@ public class UserController {
         userDTO = userService.register(userDTO);
         return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
     }
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/login")
-    public ResponseEntity<UserDTO> login(@Valid @RequestBody UserDTO userDto){
-        userDto = userService.login(userDto.getUserName(),userDto.getPassword());
+    public ResponseEntity<UserDTO> login(@RequestBody UserDTO userDto){
+        userDto = userService.login(userDto.getEmailId(),userDto.getPassword());
         return new ResponseEntity<>(userDto, HttpStatus.OK);
+    }
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/profile/{userName}")
+    public ResponseEntity<UserDTO> getInfoByUserName(@PathVariable String userName){
+        UserDTO userDTO = userService.getInfoByUserName(userName);
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 }

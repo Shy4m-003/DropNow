@@ -1,5 +1,6 @@
 package com.scrop.dropnow.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,4 @@ public class DriverEntity {
     private String emailId;
     @Column(nullable = false)
     private String password;
-    private String licenseNumber;
-    private String vehicle;
-    private Long rating;
 }

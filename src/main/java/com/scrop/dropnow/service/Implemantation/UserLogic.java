@@ -7,6 +7,7 @@ import com.scrop.dropnow.exceptions.ErrorModel;
 import com.scrop.dropnow.model.UserDTO;
 import com.scrop.dropnow.repository.User_Repository;
 import com.scrop.dropnow.service.UserService;
+import jakarta.validation.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,9 +51,9 @@ public class UserLogic implements UserService {
     }
 
     @Override
-    public UserDTO login(String userName, String password) {
+    public UserDTO login(String emailId, String password) {
         UserDTO userDto = null;
-        Optional<UserEntity> optionalUserEntity = userRepository.findByUserNameAndPassword(userName,password);
+        Optional<UserEntity> optionalUserEntity = userRepository.findByEmailIdAndPassword(emailId,password);
         if(optionalUserEntity.isPresent()){
             userDto = userConverter.entityToDto(optionalUserEntity.get());
         }
@@ -65,5 +66,20 @@ public class UserLogic implements UserService {
             throw new BusinessException(errorModelList);
         }
         return userDto;
+    }
+
+    @Override
+    public UserDTO getInfoByUserName(String userName) {
+        Optional<UserEntity> entity = userRepository.findByUserName(userName);
+        if (entity.isPresent()) {
+            return userConverter.entityToDto(entity.get());
+        } else {
+            List<ErrorModel> errorModelList = new ArrayList<>();
+            ErrorModel errorModel = new ErrorModel();
+            errorModel.setCode("Invalid Login");
+            errorModel.setMessage("Invalid EmailId or Password");
+            errorModelList.add(errorModel);
+            throw new BusinessException(errorModelList);
+        }
     }
 }

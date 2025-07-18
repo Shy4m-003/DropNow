@@ -7,10 +7,9 @@ import lombok.Setter;
 @Setter
 
 public class VehicleDto {
+    private String Name;
     private String vehicleType;
     private String registrationNumber;
-    private String brand;
-    private String color;
     private String seatingCapacity;
     private Long driverId;
 }

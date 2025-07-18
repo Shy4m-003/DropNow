@@ -13,10 +13,9 @@ public class VehicleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    private String Name;
     private String vehicleType;
     private String registrationNumber;
-    private String brand;
-    private String color;
     private String seatingCapacity;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "VehicleOwner" ,nullable = false)

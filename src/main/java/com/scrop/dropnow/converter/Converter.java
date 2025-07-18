@@ -1,7 +1,5 @@
 package com.scrop.dropnow.converter;
 
-import com.scrop.dropnow.entity.ReservationEntity;
-import com.scrop.dropnow.model.ReservationRequestDto;
 import org.springframework.stereotype.Component;
 
 @Component
