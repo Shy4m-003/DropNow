@@ -7,16 +7,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class RideConfirmDto {
+public class UserCardDto {
+    private Long userId;
     private String name;
     private String vehicleType;
-    private String vehicleNumber;
-    private String pickupLocation;
-    private String dropLocation;
+    private String pickUp;
+    private String drop;
     private double distance;
     private double fare;
     private double timeMultiplier;
-    private double userId;
-    private double driverId;
-    private String userName;
 }

@@ -10,7 +10,8 @@ public class PriceCalculationService {
     private final Random random = new Random();
 
     public double generateRandomDistance() {
-        return 2 + (8 * random.nextDouble()); // distance between 2 km and 10 km
+        double randomDistance = 1 + (Math.random() * 9); // Random between 1 to 10 km
+        return Math.round(randomDistance * 100.0) / 100.0; // Round to 2 decimal places// distance between 2 km and 10 km
     }
 
     public double getTimeMultiplier(LocalTime time) {
@@ -23,11 +24,13 @@ public class PriceCalculationService {
     }
 
     public double getBaseFarePerKm(String vehicleType) {
-        return switch (vehicleType.toLowerCase()) {
-            case "bike" -> 10.0;
-            case "auto" -> 15.0;
-            case "car" -> 20.0;
-            default -> throw new IllegalArgumentException("Unknown vehicle type");
+        vehicleType = vehicleType.trim().toLowerCase();
+        return switch (vehicleType) {
+            case "two wheeler" -> 10.0;
+            case "three wheeler" -> 15.0;
+            case "four wheeler" -> 20.0;
+            case "four wheeler-lux" -> 30.0;
+            default -> throw new IllegalArgumentException("Unknown vehicle type: " + vehicleType);
         };
     }
 

@@ -2,8 +2,10 @@ package com.scrop.dropnow.controller;
 
 import com.scrop.dropnow.model.DriverCardDto;
 import com.scrop.dropnow.model.LocationDto;
+import com.scrop.dropnow.model.RideConfirmDto;
 import com.scrop.dropnow.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,5 +22,10 @@ public class BookingController {
     public ResponseEntity<Map<String, List<DriverCardDto>>> book(@RequestBody LocationDto locationDto) {
         Map<String, List<DriverCardDto>> driverCardMap = bookingService.book(locationDto);
         return ResponseEntity.ok(driverCardMap);
+    }
+    @PostMapping("/confirm")
+    public ResponseEntity<RideConfirmDto> confirm(@RequestBody RideConfirmDto rideConfirmDto){
+        rideConfirmDto = bookingService.confirm(rideConfirmDto);
+        return new ResponseEntity<>(rideConfirmDto,HttpStatus.OK);
     }
 }

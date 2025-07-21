@@ -8,16 +8,16 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "ride history")
+@Table(name = "RideHistory")
 public class RideHistoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long Id;
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
-    @ManyToOne()
-    @JoinColumn(name ="driver-id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name ="driver_id")
     private DriverEntity driverEntity;
     private String name;
     private String vehicleType;
@@ -27,5 +27,5 @@ public class RideHistoryEntity {
     private double distance;
     private double fare;
     private double timeMultiplier;
-
+    private String USER_NAME;
 }

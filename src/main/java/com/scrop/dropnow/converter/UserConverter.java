@@ -18,6 +18,7 @@ public class UserConverter {
         dto.setId(userEntity.getId());
         dto.setUserName(userEntity.getUserName());
         dto.setEmailId(userEntity.getEmailId());
+        dto.setId(userEntity.getId());
         return dto;
     }
 }

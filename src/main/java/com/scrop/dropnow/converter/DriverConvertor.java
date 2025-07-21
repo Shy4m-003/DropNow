@@ -17,6 +17,7 @@ public class DriverConvertor {
         DriverDTO dto = new DriverDTO();
         dto.setUserName(entity.getUserName());
         dto.setEmailId(entity.getEmailId());
+        dto.setId(entity.getId());
         return dto;
     }
 }

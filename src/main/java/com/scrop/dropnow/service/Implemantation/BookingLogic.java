@@ -32,7 +32,7 @@ public class BookingLogic implements BookingService {
     @Override
     public Map<String, List<DriverCardDto>> book(LocationDto locationDto) {
         List<VehicleEntity> bikeList = vehicleRepository.findByVehicleType("Two Wheeler");
-        List<VehicleEntity> autoList = vehicleRepository.findByVehicleType("Three wheeler");
+        List<VehicleEntity> autoList = vehicleRepository.findByVehicleType("Three Wheeler");
         List<VehicleEntity> carList = vehicleRepository.findByVehicleType("Four Wheeler");
         List<VehicleEntity> luxCarList = vehicleRepository.findByVehicleType("Four Wheeler-lux");
         Map<String, List<DriverCardDto>> categorizedDrivers = new HashMap<>();
@@ -57,9 +57,10 @@ public class BookingLogic implements BookingService {
     }
 
     @Override
-    public void confirm(RideConfirmDto dto) {
+    public RideConfirmDto confirm(RideConfirmDto dto) {
         RideHistoryEntity rideHistoryEntity = rideConfirmConverter.dtoToEntity(dto);
-        repository.save(rideHistoryEntity);
+        rideHistoryEntity = repository.save(rideHistoryEntity);
+        dto = rideConfirmConverter.entityTODto(rideHistoryEntity);
+        return dto;
     }
-
 }
