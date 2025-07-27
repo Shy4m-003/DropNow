@@ -14,8 +14,8 @@ public class UserEntity {
     private Long id;
     @Column(nullable = false)
     private String userName;
-    @Column(nullable = false)
-    private String emailId;
+    @Column(nullable = false,unique = true,length = 10)
+    private String mobileNumber;
     @Column(nullable = false)
     private String password;
 }

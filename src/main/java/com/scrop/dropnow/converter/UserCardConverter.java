@@ -13,7 +13,7 @@ public class UserCardConverter {
     private PriceCalculationService priceCalculationService;
     public UserCardDto entityToDto(UserRequestEntity entity){
         UserCardDto cardDto = new UserCardDto();
-        cardDto.setUserId(entity.getUserEntity().getId());
+        cardDto.setUserId(entity.getUser().getId());
         cardDto.setName(entity.getName());
         cardDto.setPickUp(entity.getPickupLocation());
         cardDto.setDrop(entity.getDropLocation());

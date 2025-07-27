@@ -9,14 +9,14 @@ public class DriverConvertor {
     public DriverEntity dtoToEntity(DriverDTO dto){
         DriverEntity entity = new DriverEntity();
         entity.setUserName(dto.getUserName());
-        entity.setEmailId(dto.getEmailId());
+        entity.setMobileNumber(dto.getMobileNumber());
         entity.setPassword(dto.getPassword());
         return entity;
     }
     public DriverDTO entityToDto(DriverEntity entity){
         DriverDTO dto = new DriverDTO();
         dto.setUserName(entity.getUserName());
-        dto.setEmailId(entity.getEmailId());
+        dto.setMobileNumber(entity.getMobileNumber());
         dto.setId(entity.getId());
         return dto;
     }

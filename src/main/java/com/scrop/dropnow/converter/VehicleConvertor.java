@@ -19,8 +19,9 @@ public class VehicleConvertor {
         dto.setName(entity.getName());
         dto.setVehicleType(entity.getVehicleType());
         dto.setRegistrationNumber(entity.getRegistrationNumber());
-        dto.setSeatingCapacity(dto.getSeatingCapacity());
-        dto.setDriverId(entity.getDriverEntity().getId());
+        dto.setSeatingCapacity(entity.getSeatingCapacity());
+        dto.setUserName(entity.getDriverEntity().getUserName());
+        dto.setMobileNumber(entity.getDriverEntity().getMobileNumber());
         return dto;
     }
 }

@@ -17,8 +17,7 @@ public class DriverEntity {
     private Long id;
     @Column(nullable = false)
     private String userName;
-    @Column(nullable = false)
-    private String emailId;
+    private String mobileNumber;
     @Column(nullable = false)
     private String password;
 }

@@ -23,37 +23,27 @@ public class UserLogic implements UserService {
     private UserConverter userConverter;
     @Override
     public UserDTO register(UserDTO userDetails) {
-        Optional<UserEntity> optionalUserEntity = userRepository.findByEmailId(userDetails.getEmailId());
-        Optional<UserEntity> userEntityOptional = userRepository.findByUserName(userDetails.getUserName());
+        Optional<UserEntity> optionalUserEntity = userRepository.findByMobileNumber(userDetails.getMobileNumber());
         if(optionalUserEntity.isPresent()){
             List<ErrorModel> errorModelList = new ArrayList<>();
             ErrorModel errorModel = new ErrorModel();
-            errorModel.setCode("Email_Already_Exist");
-            errorModel.setMessage("The Email You Entered already Exist");
-            errorModelList.add(errorModel);
-            throw new BusinessException(errorModelList);
-        }
-        if(userEntityOptional.isPresent()){
-            List<ErrorModel> errorModelList = new ArrayList<>();
-            ErrorModel errorModel = new ErrorModel();
-            errorModel.setCode("User_Name_Exist");
-            errorModel.setMessage("The username You Entered is Not Available");
+            errorModel.setCode("Mobile_Number_Exist");
+            errorModel.setMessage("The Mobile Number You Entered already Exist, Please Login");
             errorModelList.add(errorModel);
             throw new BusinessException(errorModelList);
         }
         UserEntity entity = userConverter.dtoToEntity(userDetails);
         entity = userRepository.save(entity);
         userDetails = userConverter.entityToDto(entity);
-        System.out.println("DEBUG - DTO Email: " + userDetails.getEmailId());
-        System.out.println("DEBUG - Entity Email: " + entity.getEmailId());
+        System.out.println("DEBUG - Entity Email: " + entity.getMobileNumber());
         System.out.println("Saving entity: " + entity);
         return userDetails;
     }
 
     @Override
-    public UserDTO login(String emailId, String password) {
+    public UserDTO login(String mobileNumber, String password) {
         UserDTO userDto = null;
-        Optional<UserEntity> optionalUserEntity = userRepository.findByEmailIdAndPassword(emailId,password);
+        Optional<UserEntity> optionalUserEntity = userRepository.findByMobileNumberAndPassword(mobileNumber,password);
         if(optionalUserEntity.isPresent()){
             userDto = userConverter.entityToDto(optionalUserEntity.get());
         }
@@ -61,7 +51,7 @@ public class UserLogic implements UserService {
             List<ErrorModel> errorModelList = new ArrayList<>();
             ErrorModel errorModel = new ErrorModel();
             errorModel.setCode("Invalid Login");
-            errorModel.setMessage("Invalid EmailId or Password");
+            errorModel.setMessage("Invalid Mobile Number or Password");
             errorModelList.add(errorModel);
             throw new BusinessException(errorModelList);
         }

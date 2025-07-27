@@ -1,6 +1,4 @@
 package com.scrop.dropnow.controller;
-
-import com.scrop.dropnow.model.DriverCardDto;
 import com.scrop.dropnow.model.RideConfirmDto;
 import com.scrop.dropnow.model.UserCardDto;
 import com.scrop.dropnow.service.OfferingService;
@@ -14,6 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/DropNow/driver")
+@CrossOrigin(origins = "http://localhost:4200")
 public class OfferingController {
     @Autowired
     private OfferingService offeringService;

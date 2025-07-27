@@ -9,7 +9,7 @@ public class UserConverter {
     public UserEntity dtoToEntity(UserDTO userDTO){
         UserEntity entity = new UserEntity();
         entity.setUserName(userDTO.getUserName());
-        entity.setEmailId(userDTO.getEmailId());
+        entity.setMobileNumber(userDTO.getMobileNumber());
         entity.setPassword(userDTO.getPassword());
         return entity;
     }
@@ -17,7 +17,7 @@ public class UserConverter {
         UserDTO dto = new UserDTO();
         dto.setId(userEntity.getId());
         dto.setUserName(userEntity.getUserName());
-        dto.setEmailId(userEntity.getEmailId());
+        dto.setMobileNumber(userEntity.getMobileNumber());
         dto.setId(userEntity.getId());
         return dto;
     }

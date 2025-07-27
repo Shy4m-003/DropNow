@@ -18,5 +18,5 @@ public class UserRequestEntity {
     private String dropLocation;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private UserEntity userEntity;
+    private UserEntity user;
 }

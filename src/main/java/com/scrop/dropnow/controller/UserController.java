@@ -32,7 +32,7 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/login")
     public ResponseEntity<UserDTO> login(@RequestBody UserDTO userDto){
-        userDto = userService.login(userDto.getEmailId(),userDto.getPassword());
+        userDto = userService.login(userDto.getMobileNumber(),userDto.getPassword());
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
     @CrossOrigin(origins = "http://localhost:4200")

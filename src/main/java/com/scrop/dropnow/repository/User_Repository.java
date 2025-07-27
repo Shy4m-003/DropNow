@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 public interface User_Repository extends CrudRepository<UserEntity,Long> {
-    Optional<UserEntity> findByEmailIdAndPassword(String emailId,String password);
-    Optional<UserEntity> findByEmailId(String emailId);
+    Optional<UserEntity> findByMobileNumberAndPassword(String mobileNumber,String password);
     Optional<UserEntity> findByUserName(String userName);
+    Optional<UserEntity> findByMobileNumber(String mobileNumber);
 }

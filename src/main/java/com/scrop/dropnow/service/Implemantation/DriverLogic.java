@@ -22,7 +22,7 @@ public class DriverLogic implements DriverService {
     private DriverConvertor driverConvertor;
     @Override
     public DriverDTO register(DriverDTO driverDTO) {
-        Optional<DriverEntity> optionalDriverEntity = driverRepository.findByEmailId(driverDTO.getEmailId());
+        Optional<DriverEntity> optionalDriverEntity = driverRepository.findByMobileNumber(driverDTO.getMobileNumber());
         Optional<DriverEntity> driverEntityOptional = driverRepository.findByUserName(driverDTO.getUserName());
         if(optionalDriverEntity.isPresent()){
             List<ErrorModel> errorModelList = new ArrayList<>();
@@ -46,9 +46,9 @@ public class DriverLogic implements DriverService {
         return driverDTO;
     }
     @Override
-    public DriverDTO login(String emailId, String password) {
+    public DriverDTO login(String mobileNumber, String password) {
         DriverDTO dto = null;
-        Optional<DriverEntity> optionalDriverEntity = driverRepository.findByEmailIdAndPassword(emailId,password);
+        Optional<DriverEntity> optionalDriverEntity = driverRepository.findByMobileNumberAndPassword(mobileNumber,password);
         if(optionalDriverEntity.isPresent()){
             dto  = driverConvertor.entityToDto(optionalDriverEntity.get());
         }else{
@@ -63,8 +63,8 @@ public class DriverLogic implements DriverService {
     }
 
     @Override
-    public DriverDTO getInfoByUserName(String userName) {
-        Optional<DriverEntity> entity = driverRepository.findByUserName(userName);
+    public DriverDTO getInfoByUserId(Long id) {
+        Optional<DriverEntity> entity = driverRepository.findById(id);
         if (entity.isPresent()) {
             return driverConvertor.entityToDto(entity.get());
         } else {
