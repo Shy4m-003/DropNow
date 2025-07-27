@@ -1,14 +1,12 @@
-# Use OpenJDK image for Spring Boot
-FROM openjdk:17-jdk-slim
-
-# Set the working directory inside the container
+# Stage 1: Build the JAR using Maven
+FROM maven:3.9.4-eclipse-temurin-17 as build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copy the JAR file built from your Spring Boot project
-COPY target/dropnow-0.0.1-SNAPSHOT.jar app.jar
-
-# Expose the port your app runs on
+# Stage 2: Run the Spring Boot JAR
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
-
-# Command to run the JAR
 ENTRYPOINT ["java", "-jar", "app.jar"]
